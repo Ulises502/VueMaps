@@ -1,10 +1,9 @@
 <template>
   <div id="container">
     <div id="container-info">
-      <Filtro v-for="item in checkboxes" :key="item.name" >
-        <Checkbox 
+      <Filtro>
+        <Checkbox v-for="item in checkboxes" :key="item.name"
           v-model="item.selected"
-          :key="item.name"
           :name="item.name"      
           :label="item.label"
           :hintMessage="item.hintMessage"
@@ -59,13 +58,7 @@ export default {
       },
       clientSecret: "FTZGMLOIQWFY3A0ELEZIZSUU3M4EKOJKEPXKWUWTMWK1EY4H",
       clientID: "GOSFGAOZKCSLMWADY1ORYJV2A4GUNNHAHBVWY500S1IM42CS",
-      checkboxes: [
-        {
-          name: "Type",
-          label: "Type",
-          hintMessage: "Select type of attraction to render"
-        }
-      ]
+      checkboxes: []
     };
   },
   methods: {
@@ -125,6 +118,18 @@ export default {
   },
   mounted() {
     this.setupLeafletMap();
+    axios
+        .get(
+          `https://api.foursquare.com/v2/venues/search?client_id=${this.clientID}&client_secret=${this.clientSecret}&v=20180323&limit=10&near=San Francisco, CA&query="Edificio"`
+        )
+        .then((data) => {
+          console.log(data.data.response)
+        });
+    this.checkboxes = {
+          name: "Type",
+          label: "Type",
+          hintMessage: "Select type of attraction to render"
+        }
   },
 };
 </script>
