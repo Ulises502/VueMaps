@@ -6,7 +6,6 @@
           v-model="item.selected"
           :name="item.name"      
           :label="item.label"
-          :hintMessage="item.hintMessage"
           @change="change()"
         />
       </Filtro>
@@ -58,7 +57,8 @@ export default {
       },
       clientSecret: "FTZGMLOIQWFY3A0ELEZIZSUU3M4EKOJKEPXKWUWTMWK1EY4H",
       clientID: "GOSFGAOZKCSLMWADY1ORYJV2A4GUNNHAHBVWY500S1IM42CS",
-      checkboxes: []
+      checkboxes: [],
+      feats: [],
     };
   },
   methods: {
@@ -94,6 +94,8 @@ export default {
         layer.bindPopup(feature.properties.name);
         layer.on('mouseover', () => { layer.openPopup(); });
         layer.on('mouseout', () => { layer.closePopup(); });
+        
+        this.feats.push(feature.properties.name);
       }
     },
     onClick(e) {
@@ -112,24 +114,34 @@ export default {
           };
         });
     },
+
+    listCheckboxes() {
+      for (let index = 0; index < 5; index++) {
+        axios
+          .get(
+            `https://api.foursquare.com/v2/venues/search?client_id=${this.clientID}&client_secret=${this.clientSecret}&v=20180323&limit=1&near=San Francisco, CA&query=${this.feats[index]}`
+          )
+          .then((data) => {
+            //if (this.checkboxes.length<5 && !this.checkboxes.some( e => 
+                //e.name === data.data.response.venues[0].categories[0].name && 
+                //e.label === data.data.response.venues[0].categories[0].nameS
+              //)) {
+              this.checkboxes.push(
+                {name: data.data.response.venues[0].categories[0].name,
+                label: data.data.response.venues[0].categories[0].name,}
+              )
+            //}
+          });
+      }
+    },
+
     change() {
 
     }
   },
   mounted() {
     this.setupLeafletMap();
-    axios
-        .get(
-          `https://api.foursquare.com/v2/venues/search?client_id=${this.clientID}&client_secret=${this.clientSecret}&v=20180323&limit=10&near=San Francisco, CA&query="Edificio"`
-        )
-        .then((data) => {
-          console.log(data.data.response)
-        });
-    this.checkboxes = {
-          name: "Type",
-          label: "Type",
-          hintMessage: "Select type of attraction to render"
-        }
+    this.listCheckboxes();
   },
 };
 </script>
