@@ -1,19 +1,31 @@
 <template>
   <div id="container">
-    <div id="info">
-      <div v-if="this.attraction.name">
-        <p>
-          <strong>Name:</strong>
-          {{this.attraction.name}}
-        </p>
-        <p>
-          <strong>Address:</strong>
-          {{this.attraction.address}}
-        </p>
-        <p>
-          <strong>Type:</strong>
-          {{this.attraction.category}}
-        </p>
+    <div id="container-info">
+      <Filtro v-for="item in checkboxes" :key="item.name" >
+        <Checkbox 
+          v-model="item.selected"
+          :key="item.name"
+          :name="item.name"      
+          :label="item.label"
+          :hintMessage="item.hintMessage"
+          @change="change()"
+        />
+      </Filtro>
+      <div id="info">
+        <div v-if="this.attraction.name">
+          <p>
+            <strong>Name:</strong>
+            {{this.attraction.name}}
+          </p>
+          <p>
+            <strong>Address:</strong>
+            {{this.attraction.address}}
+          </p>
+          <p>
+            <strong>Type:</strong>
+            {{this.attraction.category}}
+          </p>
+        </div>
       </div>
     </div>
     <div id="mapContainer"></div>
@@ -26,9 +38,15 @@ import 'core-js';
 import L from "leaflet";
 import data from "../Historic-Landmarks.json";
 import axios from "axios";
+import Filtro from "./Filtro.vue"
+import Checkbox from "./Checkbox/Checkbox.vue"
 
 export default {
     name: "Mapa",
+    components: {
+      Filtro,
+      Checkbox,
+    },
   data() {
     return {
       center: [37.7749, -122.4194],
@@ -41,6 +59,13 @@ export default {
       },
       clientSecret: "FTZGMLOIQWFY3A0ELEZIZSUU3M4EKOJKEPXKWUWTMWK1EY4H",
       clientID: "GOSFGAOZKCSLMWADY1ORYJV2A4GUNNHAHBVWY500S1IM42CS",
+      checkboxes: [
+        {
+          name: "Type",
+          label: "Type",
+          hintMessage: "Select type of attraction to render"
+        }
+      ]
     };
   },
   methods: {
@@ -94,6 +119,9 @@ export default {
           };
         });
     },
+    change() {
+
+    }
   },
   mounted() {
     this.setupLeafletMap();
@@ -106,11 +134,22 @@ export default {
   display: flex;
 }
 #info {
+  margin-top: 48vh;
   width: 18vw;
-  height: 100vh;
+  height: 48vh;
+}
+#container-info {
+  width: 18vw;
+  height: 95vh;
 }
 #mapContainer {
   width: 80vw;
-  height: 100vh;
+  height: 95vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+filtro {
+  width: 18vw;
+  height: 48vh;
 }
 </style>
