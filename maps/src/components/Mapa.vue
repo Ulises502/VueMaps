@@ -115,25 +115,21 @@ export default {
         });
     },
 
-    listCheckboxes() {
-      for (let index = 0; index < 5; index++) {
-        axios
-          .get(
-            `https://api.foursquare.com/v2/venues/search?client_id=${this.clientID}&client_secret=${this.clientSecret}&v=20180323&limit=1&near=San Francisco, CA&query=${this.feats[index]}`
-          )
-          .then((data) => {
+    //listCheckboxes() {
+      //for (let index = 0; index < 5; index++) {
+        
             //if (this.checkboxes.length<5 && !this.checkboxes.some( e => 
                 //e.name === data.data.response.venues[0].categories[0].name && 
                 //e.label === data.data.response.venues[0].categories[0].nameS
               //)) {
-              this.checkboxes.push(
-                {name: data.data.response.venues[0].categories[0].name,
-                label: data.data.response.venues[0].categories[0].name,}
-              )
+              //this.checkboxes.push(
+                //{name: data.data.response.venues[0].categories[0].name,
+                //label: data.data.response.venues[0].categories[0].name,}
+              //)
             //}
-          });
-      }
-    },
+          //});
+      //}
+    //},
 
     change() {
 
