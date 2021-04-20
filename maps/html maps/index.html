@@ -2,25 +2,28 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Mapa Provincia de Buenos Aires</title>
   <meta name="description" content="Mapa">
   <meta name="author" content="Fran">
-  <link rel="stylesheet" href="/maps/html maps/leaflet/leaflet.css"/>
-   <link rel="icon" href="data:;base64,=">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+  <link href="./opacity/Control.Opacity.css" rel="stylesheet" />
+  <link rel="icon" href="data:;base64,=">
+  <script src="https://code.jquery.com/jquery-3.2.1.js" ></script>
 </head>
-<style>
-#map { 
-  height: 90%; 
-}
-</style>
 
 <body>
     <h1>Mapa de la Prov. Buenos Aires</h1>
 
-    <div id="map"></div>
+    <div id="map" style="width:500px; height:500px"></div>
 
-    <script src="/maps/html maps/leaflet/leaflet-src.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    <script src="./opacity/Control.Opacity.js"></script>
     <script src="js/scripts.js"></script>
 </body>
 </html>
