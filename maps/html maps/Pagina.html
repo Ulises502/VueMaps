@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!---Cargar CSS de Leaflet (Style stylesheet)-->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+	
+	<!--Cargar Leaflet en modo Host-->
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+	
+	<!--Cargar librería JQuery-->
+	<script src="https://code.jquery.com/jquery-3.2.1.js" ></script>
+
+	<style >
+		/*Dimensiones del mapa: toda la pantalla*/
+		#map {position: absolute; top: 0; bottom: 0; left: 0; right: 0;}
+	</style>>
+</head>
+<body>
+	<!--Crear el objeto mapa-->
+	<div id = "map"></div>
+	<script >
+		var map = L.map('map').setView([0,0],1);
+
+		//Abrimos OpenStreetMap
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+		//Agregar capas de Geoserver
+		 var layerLugares = L.tileLayer.wms('http://http://localhost:8080/geoserver/PRIMER_MAPA/wms?',{
+			layers: 'PRIMER_MAPA:LugaresFamiliares',
+			format: 'image/png',
+			transparent: true,}
+		);
+		 map.addLayer(layerLugares);
+
+		  var layerRutas = L.tileLayer.wms('http://localhost:8080/geoserver/PRIMER_MAPA/wms?',{
+			layers: 'PRIMER_MAPA%3ARutasFamiliares',
+			format: 'image/png',
+			transparent: true}
+		);
+		 map.addLayer(layerRutas);
+
+	</script>>
+</body>
+</html>>

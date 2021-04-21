@@ -38,4 +38,9 @@ map.addControl(lowerOpacity);
 higherOpacity.setOpacityLayer(wmsLayer);
 lowerOpacity.setOpacityLayer(wmsLayer);
 
-var miniMap = new L.Control.MiniMap(wmsLayer).addTo(map);
+var openLayer= L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18, 
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+});
+
+var miniMap = new L.Control.MiniMap(openLayer).addTo(map);
