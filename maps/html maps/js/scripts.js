@@ -28,8 +28,8 @@ var wmsLayer= L.tileLayer.wms('http://localhost:8080/geoserver/CURSO/Poblacion_P
     className:'capa',
 });
 var pergaminoLayer= L.tileLayer.wms('https://ide.pergamino.gob.ar:8443/geoserver/wms?SERVICE=WMS&', {
-    layers: 'publico:base',
-    styles: 'publico:base style',
+    layers: 'publico:cobertura_agua_antes_de_2015',
+    styles: 'publico:base stylepublico:cobertura agua antes de 2015',
     format: 'image/png',
     transparent: true,
     className:'capa',
@@ -42,7 +42,7 @@ var arbaLayer= L.tileLayer.wms('http://geo.arba.gov.ar/geoserver/idera/wms', {
     className:'capa',
 });
 
-map.addLayer(wmsLayer);
+map.addLayer(pergaminoLayer);
 
 /***************OPACITY CONTROLS*******************/
 
@@ -67,7 +67,7 @@ var miniMap = new L.Control.MiniMap(openLayer).addTo(map);
 array_capas = [wmsLayer, pergaminoLayer, arbaLayer];
 capa_actual = 0;
 
-document.getElementsByClassName("button").addEventListener("click", cambiarCapa());
+document.getElementsByClassName('button').addEventListener("click", cambiarCapa());
 
 function cambiarCapa() {
     map.removeLayer(array_capas[capa_actual]);
