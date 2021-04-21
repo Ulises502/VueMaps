@@ -28,7 +28,7 @@ var wmsLayer= L.tileLayer.wms('http://localhost:8080/geoserver/CURSO/Poblacion_P
     className:'capa',
 });
 
-map.addLayer(wmsLayer); 
+map.addLayer(wmsLayer);
 
 var higherOpacity = new L.Control.higherOpacity();
 map.addControl(higherOpacity);
@@ -37,3 +37,5 @@ map.addControl(lowerOpacity);
 
 higherOpacity.setOpacityLayer(wmsLayer);
 lowerOpacity.setOpacityLayer(wmsLayer);
+
+var miniMap = new L.Control.MiniMap(wmsLayer).addTo(map);
