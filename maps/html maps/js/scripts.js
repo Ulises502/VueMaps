@@ -27,8 +27,24 @@ var wmsLayer= L.tileLayer.wms('http://localhost:8080/geoserver/CURSO/Poblacion_P
     transparent: true,
     className:'capa',
 });
+var pergaminoLayer= L.tileLayer.wms('https://ide.pergamino.gob.ar:8443/geoserver/wms?SERVICE=WMS&', {
+    layers: 'publico:base',
+    styles: 'publico:base style',
+    format: 'image/png',
+    transparent: true,
+    className:'capa',
+});
+var arbaLayer= L.tileLayer.wms('http://geo.arba.gov.ar/geoserver/idera/wms', {
+    layers: 'Circunscripcion',
+    styles: 'idera:Circunscripcion',
+    format: 'image/png',
+    transparent: true,
+    className:'capa',
+});
 
 map.addLayer(wmsLayer);
+
+/***************OPACITY CONTROLS*******************/
 
 var higherOpacity = new L.Control.higherOpacity();
 map.addControl(higherOpacity);
@@ -38,9 +54,28 @@ map.addControl(lowerOpacity);
 higherOpacity.setOpacityLayer(wmsLayer);
 lowerOpacity.setOpacityLayer(wmsLayer);
 
+/*******************MINI MAP CONTROLS************/
+
 var openLayer= L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18, 
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
 
 var miniMap = new L.Control.MiniMap(openLayer).addTo(map);
+
+/*************BUTTON CONTROLS******************/
+array_capas = [wmsLayer, pergaminoLayer, arbaLayer];
+capa_actual = 0;
+
+document.getElementsByClassName("button").addEventListener("click", cambiarCapa());
+
+function cambiarCapa() {
+    map.removeLayer(array_capas[capa_actual]);
+    if (capa_actual != 2) {
+        capa_actual += 1;
+    }
+    else {
+        capa_actual = 0
+    }
+    map.addLayer(array_capas[(capa_actual)]);
+};
