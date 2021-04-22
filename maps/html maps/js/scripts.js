@@ -63,7 +63,7 @@ var openLayer= L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
 var miniMap = new L.Control.MiniMap(openLayer).addTo(map);
 
-/*************BUTTON CONTROLS******************/
+/*************LAYERS BUTTON CONTROLS******************/
 array_capas = [wmsLayer, eduLayer, arbaLayer];
 capa_actual = 0;
 

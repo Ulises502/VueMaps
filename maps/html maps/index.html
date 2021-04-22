@@ -15,20 +15,22 @@
   <link href="Leaflet-MiniMap-master/src/Control.MiniMap.css"/>
   <link rel="icon" href="data:;base64,="/>
   <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
 
 <body>
     <h1>Mapa de la Prov. Buenos Aires</h1>
-
-    <form class="form-inline" action="/index.html">
-      <label for="wms">WMS:</label>
-      <input type="text" id="wms" placeholder="Dirección web de WMS" name="wms">
-      <label for="capa">Nombre Capa:</label>
-      <input type="text" id="capa" placeholder="Nombre del EspacioTrabajo:Capa" name="capa">
-      <label for="estilo">Estilo</label>
-      <input type="text" id="estilo" placeholder="Nombre del Estilo" name="estilo">
-      <button type="submit">Cargar</button>
-    </form>
+    <div id="app">
+      <form class="form-inline" v-on:submit.prevent="loadLayer">
+        <label for="wms">WMS:</label>
+        <input type="text" id="wms" placeholder="Dirección web de WMS" name="wms" v-model="wms">
+        <label for="capa">Nombre Capa:</label>
+        <input type="text" id="capa" placeholder="Nombre del EspacioTrabajo:Capa" name="capa" v-model="capa">
+        <label for="estilo">Estilo</label>
+        <input type="text" id="estilo" placeholder="Nombre del Estilo" name="estilo" v-model="estilo">
+        <button type="submit">Cargar</button>
+      </form>
+    </div>
     <!--
       WMS: https://geoserver.opisu.gba.gob.ar/geoserver/wms?SERVICE=WMS&
       Nombre: IDEOPISU:40 AMBA - Deficit Urbano Habitacional
@@ -50,6 +52,8 @@
     crossorigin=""></script>
     <script src="./opacity/Control.Opacity.js"></script>
     <script src="Leaflet-MiniMap-master/src/Control.MiniMap.js"></script>
+    <script src="//unpkg.com/vue2-leaflet"></script>
+    <script type="module" src="js/App.js"></script>
     <script src="js/scripts.js"></script>
 </body>
 </html>
