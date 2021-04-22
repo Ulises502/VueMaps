@@ -27,22 +27,22 @@ var wmsLayer= L.tileLayer.wms('http://localhost:8080/geoserver/CURSO/Poblacion_P
     transparent: true,
     className:'capa',
 });
-var pergaminoLayer= L.tileLayer.wms('https://ide.pergamino.gob.ar:8443/geoserver/wms?SERVICE=WMS&', {
-    layers: 'publico:cobertura_agua_antes_de_2015',
-    styles: 'publico:base stylepublico:cobertura agua antes de 2015',
+var eduLayer= L.tileLayer.wms('http://mapaescolar.abc.gob.ar/geodie/wms?SERVICE=WMS&', {
+    layers: 'capaprivada:circuitos_electorales',
+    styles: 'capaprivada:circuitos',
     format: 'image/png',
     transparent: true,
     className:'capa',
 });
-var arbaLayer= L.tileLayer.wms('http://geo.arba.gov.ar/geoserver/idera/wms', {
-    layers: 'Circunscripcion',
-    styles: 'idera:Circunscripcion',
+var arbaLayer= L.tileLayer.wms('http://geo.arba.gov.ar/geoserver/idera/ows?SERVICE=WMS&', {
+    layers: 'Departamento',
+    styles: 'idera:Departamento',
     format: 'image/png',
     transparent: true,
     className:'capa',
 });
 
-map.addLayer(pergaminoLayer);
+map.addLayer(eduLayer);
 
 /***************OPACITY CONTROLS*******************/
 
@@ -64,7 +64,7 @@ var openLayer= L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 var miniMap = new L.Control.MiniMap(openLayer).addTo(map);
 
 /*************BUTTON CONTROLS******************/
-array_capas = [wmsLayer, pergaminoLayer, arbaLayer];
+array_capas = [wmsLayer, eduLayer, arbaLayer];
 capa_actual = 0;
 
 document.getElementsByClassName('button').addEventListener("click", cambiarCapa());

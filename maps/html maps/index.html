@@ -20,6 +20,21 @@
 <body>
     <h1>Mapa de la Prov. Buenos Aires</h1>
 
+    <form class="form-inline" action="/index.html">
+      <label for="wms">WMS:</label>
+      <input type="text" id="wms" placeholder="Dirección web de WMS" name="wms">
+      <label for="capa">Nombre Capa:</label>
+      <input type="text" id="capa" placeholder="Nombre del EspacioTrabajo:Capa" name="capa">
+      <label for="estilo">Estilo</label>
+      <input type="text" id="estilo" placeholder="Nombre del Estilo" name="estilo">
+      <button type="submit">Cargar</button>
+    </form>
+    <!--
+      WMS: https://geoserver.opisu.gba.gob.ar/geoserver/wms?SERVICE=WMS&
+      Nombre: IDEOPISU:40 AMBA - Deficit Urbano Habitacional
+      Estilo: polygon
+    -->
+
     <div id="map" style="width:500px; height:500px"></div>
 
     <button type="button" onclick="cambiarCapa()">Cambiar capa</button>
@@ -28,8 +43,8 @@
     <hr>
     <br>
 
-    <iframe src="https://visualizador.ideba.gba.gob.ar/" title="Visualizador IDEBA" style="width: 50%; height: 750px;"></iframe>
-
+    <!-- <iframe src="https://visualizador.ideba.gba.gob.ar/" title="Visualizador IDEBA" style="width: 50%; height: 750px;"></iframe>
+    -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
