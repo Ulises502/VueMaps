@@ -27,7 +27,7 @@ var wmsLayer= L.tileLayer.wms('http://localhost:8080/geoserver/CURSO/Poblacion_P
     transparent: true,
     className:'capa',
 });
-var eduLayer= L.tileLayer.wms('http://mapaescolar.abc.gob.ar/geodie/wms?SERVICE=WMS&', {
+var eduLayer= L.tileLayer.wms('http://mapaescolar.abc.gob.ar/geodie/wms', {
     layers: 'capaprivada:circuitos_electorales',
     styles: 'capaprivada:circuitos',
     format: 'image/png',
