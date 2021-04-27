@@ -20,6 +20,25 @@ var map = L.map('map', {
 
 L.control.scale({position:'bottomright',imperial:false}).addTo(map);
 
+/***************************** BASE MAPS ***************************************/
+
+var MyBingMapsKey = 'AuhiCJHlGzhg93IqUH_oCpl_-ZUrIE6SPftlyGYUvr9Amx5nzA-WqGcPquyFZl4L'
+    var bingMap =L.tileLayer.bing(MyBingMapsKey);
+    var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        });
+    var Argenmap_gris = L.tileLayer("https://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/mapabase_gris@EPSG%3A3857@png/{z}/{x}/{-y}.png")
+
+    var baseLayersMaps  = {
+        "Argenmap": mapa_base,
+        "Argenmap gris": Argenmap_gris,
+        "Bing Satelital": bingMap,
+        "OpenStreetMap":OpenStreetMap_Mapnik
+    };
+
+L.control.layers(baseLayersMaps,null,{collapsed:true}).addTo(map);
+
+/************** LAYERS *****************/
 var wmsLayer= L.tileLayer.wms('http://localhost:8080/geoserver/CURSO/Poblacion_PBA/wms?', {
     layers: 'CURSO:Poblacion_PBA',
     styles: 'Poblacion_PBA',
