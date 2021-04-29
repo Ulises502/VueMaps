@@ -2,7 +2,6 @@ var urlmap = 'http://wms.ign.gob.ar/geoserver/gwc/service/tms/1.0.0/capabasearge
 var attribution = "<a href='http://www.ign.gob.ar/' target='_blank' title='Instituto GeogrÃ¡fico Nacional'>IGN</a>";
 
 var mapa_base = L.tileLayer(urlmap, {
-    renderer: L.svg(),
     tms: true,
     maxZoom: 18,
     attribution: attribution,
@@ -38,6 +37,8 @@ var MyBingMapsKey = 'AuhiCJHlGzhg93IqUH_oCpl_-ZUrIE6SPftlyGYUvr9Amx5nzA-WqGcPquy
 
 L.control.layers(baseLayersMaps,null,{collapsed:true}).addTo(map);
 
+L.control.coordinates({position:'bottomright',imperial:false}).addTo(map);
+
 /************** LAYERS *****************/
 var wmsLayer= L.tileLayer.wms('http://localhost:8080/geoserver/CURSO/Poblacion_PBA/wms?', {
     layers: 'CURSO:Poblacion_PBA',
@@ -61,7 +62,7 @@ var arbaLayer= L.tileLayer.wms('http://geo.arba.gov.ar/geoserver/idera/ows?SERVI
     className:'capa',
 });
 
-map.addLayer(eduLayer);
+map.addLayer(wmsLayer);
 
 /***************OPACITY CONTROLS*******************/
 
@@ -80,13 +81,11 @@ var openLayer= L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 });
 
-var miniMap = new L.Control.MiniMap(openLayer).addTo(map);
+var miniMap = new L.Control.MiniMap(openLayer, {position:'bottomright',width:'100',height:'100'}).addTo(map);
 
 /*************LAYERS BUTTON CONTROLS******************/
 array_capas = [wmsLayer, eduLayer, arbaLayer];
 capa_actual = 0;
-
-document.getElementsByClassName('button').addEventListener("click", cambiarCapa());
 
 function cambiarCapa() {
     map.removeLayer(array_capas[capa_actual]);
